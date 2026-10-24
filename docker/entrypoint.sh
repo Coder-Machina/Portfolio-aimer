@@ -12,7 +12,41 @@ sed -i "s/80/${PORT}/g" /etc/apache2/sites-available/000-default.conf /etc/apach
 mkdir -p /var/www/html/storage/framework/{sessions,views,cache} /var/www/html/storage/logs
 mkdir -p /var/www/html/database
 
-# 3. Handle SQLite database if selected (default for instant free tier testing)
+# 3. Ensure a valid, robust APP_KEY for Laravel encryption (fixes Render generateValue format)
+APP_KEY=$(php -r '
+    $key = getenv("APP_KEY") ?: "";
+    if (str_starts_with($key, "base64:")) {
+        $decoded = base64_decode(substr($key, 7), true);
+        if ($decoded !== false && strlen($decoded) === 32) {
+            echo $key;
+            exit(0);
+        }
+    }
+    if (strlen($key) === 32) {
+        echo "base64:" . base64_encode($key);
+        exit(0);
+    }
+    $decoded = base64_decode($key, true);
+    if ($decoded !== false && strlen($decoded) === 32) {
+        echo "base64:" . $key;
+        exit(0);
+    }
+    $persistedKeyFile = "/var/www/html/storage/app_key.secret";
+    if (file_exists($persistedKeyFile)) {
+        $saved = trim((string) file_get_contents($persistedKeyFile));
+        if (str_starts_with($saved, "base64:") && strlen(base64_decode(substr($saved, 7), true) ?: "") === 32) {
+            echo $saved;
+            exit(0);
+        }
+    }
+    $newKey = "base64:" . base64_encode(random_bytes(32));
+    @file_put_contents($persistedKeyFile, $newKey);
+    echo $newKey;
+')
+export APP_KEY
+echo "==> [Portfolio] APP_KEY verified and active."
+
+# 4. Handle SQLite database if selected (default for instant free tier testing)
 if [ "${DB_CONNECTION:-sqlite}" = "sqlite" ]; then
     echo "==> [Portfolio] SQLite database mode active."
     if [ ! -f /var/www/html/database/database.sqlite ]; then
