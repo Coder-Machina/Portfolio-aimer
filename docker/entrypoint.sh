@@ -69,11 +69,15 @@ php artisan migrate --force
 # 7. Seed initial client data and admin account if database is fresh
 echo "==> [Portfolio] Checking database seed status..."
 if php artisan tinker --execute 'exit(\App\Models\Specialty::count() > 0 ? 0 : 1);' >/dev/null 2>&1; then
-    echo "==> [Portfolio] Database already seeded. Skipping seeder."
+    echo "==> [Portfolio] Database already seeded. Skipping full seeder."
 else
     echo "==> [Portfolio] Database empty. Running seeders..."
     php artisan db:seed --force
 fi
+
+# Ensure administrator account has the latest custom credentials
+echo "==> [Portfolio] Syncing administrator account credentials..."
+php artisan db:seed --class=UserSeeder --force
 
 # 8. Optimize caches for production performance
 echo "==> [Portfolio] Caching configuration, routes, and views..."
