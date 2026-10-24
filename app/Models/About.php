@@ -17,8 +17,32 @@ class About extends Model
      */
     protected $fillable = [
         'photo',
+        'headline',
         'bio',
+        'experiences',
+        'educations',
+        'certifications',
+        'languages',
+        'qualities',
+        'interests',
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'experiences' => 'array',
+            'educations' => 'array',
+            'certifications' => 'array',
+            'languages' => 'array',
+            'qualities' => 'array',
+            'interests' => 'array',
+        ];
+    }
 
     /**
      * The "booted" method of the model.

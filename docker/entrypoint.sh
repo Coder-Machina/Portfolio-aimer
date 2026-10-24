@@ -78,6 +78,8 @@ fi
 # Ensure administrator account has the latest custom credentials
 echo "==> [Portfolio] Syncing administrator account credentials..."
 php artisan db:seed --class=UserSeeder --force
+php artisan db:seed --class=AboutSeeder --force
+php artisan db:seed --class=SettingSeeder --force
 
 # 8. Optimize caches for production performance
 echo "==> [Portfolio] Caching configuration, routes, and views..."
