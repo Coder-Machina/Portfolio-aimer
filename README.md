@@ -1,59 +1,117 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Portfolio Professionnel — AKODO Aimé D. Yves
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Application web portfolio de standard international pour **AKODO Aimé D. Yves**, vidéaste, monteur vidéo et créateur de contenu audiovisuel basé à Cotonou (Bénin).
 
-## About Laravel
+Conçue avec **Laravel 12**, **Blade**, **Tailwind CSS v3** (palette Cinéma sombre `#0E0E0E` / or `#D4A847`), **Alpine.js v3**, et un panneau d'administration moderne **Filament v3** optimisé mobile (PWA).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Déploiement en production sur Render (Mode Gratuit)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Ce projet est 100% prêt pour être déployé sur [Render.com](https://render.com) en quelques clics grâce à sa configuration Docker multi-stage optimisée pour les limites de mémoire du plan gratuit (512 Mo).
 
-## Learning Laravel
+### Méthode 1 : Déploiement automatique via Blueprint (Recommandé)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+1. Connectez-vous sur votre compte **[dashboard.render.com](https://dashboard.render.com)**.
+2. Cliquez sur **« New + »** en haut à droite, puis sélectionnez **« Blueprint »**.
+3. Associez votre dépôt GitHub : `https://github.com/Coder-Machina/Portfolio-aimer.git`.
+4. Render va automatiquement détecter le fichier `render.yaml` et configurer le service web Docker avec toutes les variables d'environnement.
+5. Cliquez sur **« Apply »** : le build Docker démarre, compile les assets Vite, prépare le conteneur et lance l'application.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+### Méthode 2 : Déploiement manuel via Web Service
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Si vous préférez configurer manuellement le service sur Render :
 
-### Premium Partners
+1. Cliquez sur **« New + »** > **« Web Service »**.
+2. Sélectionnez votre dépôt GitHub : `Coder-Machina/Portfolio-aimer`.
+3. Configurez les paramètres suivants :
+   - **Name** : `portfolio-akodo`
+   - **Region** : `Frankfurt` (latence optimale vers l'Afrique de l'Ouest et l'Europe)
+   - **Environment** : `Docker`
+   - **Branch** : `main`
+   - **Plan** : `Free` (0 $/mois)
+4. Dans la section **Environment Variables**, ajoutez les clés suivantes :
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+| Clé | Valeur | Description |
+|---|---|---|
+| `APP_ENV` | `production` | Environnement de production |
+| `APP_DEBUG` | `false` | Désactive l'affichage des erreurs détaillées |
+| `APP_NAME` | `AKODO Aimé D. Yves` | Nom de l'application |
+| `APP_URL` | `https://portfolio-akodo.onrender.com` | Remplacer par l'URL Render fournie |
+| `APP_KEY` | *(Générer avec `php artisan key:generate --show`)* | Clé de chiffrement Laravel |
+| `DB_CONNECTION` | `sqlite` | Base de données embarquée sans frais |
+| `SESSION_DRIVER` | `cookie` | Maintient la connexion sans perte lors des redémarrages |
+| `CACHE_STORE` | `file` | Cache fichiers |
+| `FILESYSTEM_DISK` | `public` | Stockage des médias |
+| `LOG_CHANNEL` | `stderr` | Affiche les logs en direct dans le dashboard Render |
 
-## Contributing
+5. Cliquez sur **« Create Web Service »**.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 🗄️ Gestion de la Base de Données sur Render
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Option A : SQLite (Par défaut — 100% Gratuit sans configuration)
+Le conteneur initialise automatiquement le fichier `database/database.sqlite`, exécute les migrations et lance automatiquement les seeders pour insérer les projets, compétences et l'administrateur par défaut.
 
-## Security Vulnerabilities
+> [!NOTE]
+> Sur le plan gratuit Render sans disque persistant, le stockage de conteneur est éphémère. Pour un test de déploiement, c'est immédiat et sans frais.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Option B : MySQL externe gratuit (Persistance permanente recommandée)
+Pour une base de données persistante gratuite, vous pouvez connecter un service MySQL managé externe gratuit (comme [Aiven](https://aiven.io/), [Clever Cloud](https://www.clever-cloud.com/), ou [TiDB Cloud](https://tidbcloud.com/)) :
+1. Créez une base MySQL gratuite sur l'un de ces services.
+2. Dans Render > **Environment Variables**, définissez :
+   - `DB_CONNECTION=mysql`
+   - `DB_HOST=votre-hote.com`
+   - `DB_PORT=3306`
+   - `DB_DATABASE=votre_db`
+   - `DB_USERNAME=votre_user`
+   - `DB_PASSWORD=votre_password`
+Le conteneur migrera et peuplera automatiquement la base MySQL au démarrage.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🔐 Accès au Panneau d'Administration (Filament v3)
+
+- **URL d'administration** : `https://<votre-domaine-render>.onrender.com/admin`
+- **Email administrateur** : `aimeakd6@gmail.com`
+- **Mot de passe par défaut** : `admin1234`
+
+Le panneau d'administration est installable sur smartphone comme une application native (PWA) grâce au manifest configuré et aux icônes Retina.
+
+---
+
+## 🛠️ Développement Local
+
+```bash
+# Cloner le dépôt
+git clone git@github.com:Coder-Machina/Portfolio-aimer.git
+cd Portfolio-aimer
+
+# Installer les dépendances PHP et Node
+composer install
+npm install
+
+# Configuration d'environnement
+cp .env.example .env
+php artisan key:generate
+
+# Migrations & Seeders
+php artisan migrate --seed
+
+# Compiler les assets et lancer le serveur de dev
+npm run build
+php artisan serve
+```
+
+---
+
+## 🧪 Tests Automatisés
+
+Le projet comprend une suite complète de tests de fonctionnalités (Feature Tests) couvrant toutes les pages publiques, les détails projets, et le formulaire de contact avec limitation de débit (rate limiting) :
+
+```bash
+php artisan test
+```

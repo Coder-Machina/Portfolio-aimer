@@ -1,0 +1,17 @@
+.git
+.github
+node_modules
+vendor
+.env
+.env.*
+!.env.example
+storage/*.key
+tests
+phpunit.xml
+*.md
+.editorconfig
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+Thumbs.db
+.DS_Store

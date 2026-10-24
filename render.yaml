@@ -1,0 +1,34 @@
+# ==============================================================================
+# Render Blueprint Specification (Infrastructure-as-Code for Render.com)
+# ==============================================================================
+services:
+  - type: web
+    name: portfolio-akodo
+    runtime: docker
+    plan: free
+    region: frankfurt # Low latency for Europe and West Africa (Benin)
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /up
+    envVars:
+      - key: APP_NAME
+        value: "AKODO Aimé D. Yves"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_URL
+        value: https://portfolio-akodo.onrender.com
+      - key: APP_KEY
+        generateValue: true
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: SESSION_DRIVER
+        value: cookie
+      - key: CACHE_STORE
+        value: file
+      - key: FILESYSTEM_DISK
+        value: public
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: LOG_LEVEL
+        value: error
